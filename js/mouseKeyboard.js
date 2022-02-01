@@ -14,7 +14,6 @@ function draw(){
         background(60,55,32)
     }
 
-    background(180,55,200);
     ellipse(ellipseX,mouseY, 100)
 
     if(mouseX > windowWidth/2){
