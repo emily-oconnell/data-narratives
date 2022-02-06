@@ -3,6 +3,11 @@ function setup() {
   background(135, 206, 235);
   }
 
+  function preload(){
+    jackjack = loadImage('images/jj.png');
+  
+  }
+
 
 
 function draw() {
@@ -130,6 +135,8 @@ function draw() {
         quad(725,430,704,428,704,512,725,510)
         fill(252, 249, 217);
         rect(725,430,50,80)
+        //jack jack!
+        image(jackjack, 700, 467,100,45);
         }
     }else{
       //door is closed
