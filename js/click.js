@@ -110,3 +110,5 @@ function draw() {
     click5.draw();
 
 }
+
+var sadSongs =["4pvb0WLRcMtbPGmtejJJ6y", "4tXsR2Hv3l85TQTwgEn3Um", "0sY6ZUTh4yoctD8VIXz339", "7kt9e9LFSpN1zQtYEl19o1", "73YUReisjb3A9ActdLLjJQ", "01QdEx6kFr78ZejhQtWR5m", "6MWoRt97mnSTXZhu3ggi9C", "3lUfyFwtySI1iWcg7LXkY4", "0PurA4JVJ8YQgSVopY8fn6", "1n3b9Eekoy3S9ZSZ5DmTW1", "4AYtqFyFbX0Xkc2wtcygTr", "01K4zKU104LyJ8gMb7227B", "74WBGgUnpKrJXt6TETfR6Z", "7MbT4I8qGntX4fMdqMQgke", "4GBkffrtA51p17JH35irGA", "6RvmQShxVQwJ0AWMtP6JoU", "5GPwN5iZ9ZMSXAkppj4Uvv", "12ntTeqEeTg7GAVpe8Mhpl"]
