@@ -6,7 +6,6 @@ let furby;
 
 function preload(){
   furby = loadImage('images/furby.png');
-
 }
 
 
