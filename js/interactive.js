@@ -4,6 +4,7 @@ var spotifyOpen=0
 var iframe
 var myCanvas
 let songId
+let color = '#e6fadc'
 
 function preload(){
     feelingHype = loadImage('images/star-eyes.png')
@@ -16,7 +17,7 @@ function preload(){
 
 
 function setup() {
-    myCanvas = createCanvas(windowWidth, windowHeight);
+    myCanvas = createCanvas(windowWidth, windowHeight)
     myCanvas.parent('myContainer')
 
     /* HYPE TAYLOR */
@@ -29,28 +30,28 @@ function setup() {
    
     hypeButton.onHover = function () {
         this.stroke = "#AAAAFF"
-        this.textColor = "#000000";
-        this.text = "Hype!";
+        this.textColor = "#000000"
+        this.text = "Hype!"
         this.image = ""
-
         }
    
     hypeButton.onOutside = function () {
-        this.color = "#e6fadc";
-        this.stroke = "#e6fadc";
+        this.color = color
+        this.stroke = color
         this.image = feelingHype
-        this.text = " ";
-        this.textColor = "#000000";
+        this.text = " "
+        this.textColor = "#000000"
         }
    
     hypeButton.onPress = function () {
-        openSpotify(chooseHype());
+        this.color = "#EEEEEE"
+        openSpotify(chooseHype())
     }
 
 
     hypeButton.onRelease = function () {
-        this.color = "#EEEEEE";
-        this.textColor = "#000000";
+        this.color = color
+        this.textColor = "#000000"
     }
     /* SAD TAYLOR */
 
@@ -63,27 +64,28 @@ function setup() {
     
     sadButton.onHover = function () {
         this.stroke = "#AAAAFF"
-        this.textColor = "#000000";
-        this.text = "Sad!";
+        this.textColor = "#000000"
+        this.text = "Sad!"
         this.image = ""
     }
     
     sadButton.onOutside = function () {
-        this.color = "#e6fadc";
-        this.stroke = "#e6fadc";
+        this.color = color
+        this.stroke = color
         this.image = feelingSad
-        this.text = " ";
-        this.textColor = "#000000";
+        this.text = " "
+        this.textColor = "#000000"
     }
     
     sadButton.onPress = function () {
-        openSpotify(chooseSad());
+        this.color = "#EEEEEE"
+        openSpotify(chooseSad())
     }
 
 
     sadButton.onRelease = function () {
-        this.color = "#EEEEEE";
-        this.textColor = "#000000";
+        this.color = color
+        this.textColor = "#000000"
     }
 
 
@@ -98,28 +100,29 @@ function setup() {
    
     sadButHypeButton.onHover = function () {
         this.stroke = "#AAAAFF"
-        this.textColor = "#000000";
-        this.text = "Sad but Hype!";
+        this.textColor = "#000000"
+        this.text = "Sad but Hype!"
         this.image = ""
 
         }
    
     sadButHypeButton.onOutside = function () {
-        this.color = "#e6fadc";
-        this.stroke = "#e6fadc";
+        this.color = color
+        this.stroke = color
         this.image = feelingSadButHype
-        this.text = " ";
-        this.textColor = "#000000";
+        this.text = " "
+        this.textColor = "#000000"
         }
    
     sadButHypeButton.onPress = function () {
-        openSpotify(chooseSadButHype());
+        this.color = "#EEEEEE"
+        openSpotify(chooseSadButHype())
     }
 
 
     sadButHypeButton.onRelease = function () {
-        this.color = "#EEEEEE";
-        this.textColor = "#000000";
+        this.color = color
+        this.textColor = "#000000"
     }
 
     /* IN LOVE TAYLOR */
@@ -133,28 +136,29 @@ function setup() {
    
     inLoveButton.onHover = function () {
         this.stroke = "#AAAAFF"
-        this.textColor = "#000000";
-        this.text = "In Love!";
+        this.textColor = "#000000"
+        this.text = "In Love!"
         this.image = ""
 
         }
    
     inLoveButton.onOutside = function () {
-        this.color = "#e6fadc";
-        this.stroke = "#e6fadc";
+        this.color = color
+        this.stroke = color
         this.image = feelingInLove
-        this.text = " ";
-        this.textColor = "#000000";
+        this.text = " "
+        this.textColor = "#000000"
         }
    
     inLoveButton.onPress = function () {
-        openSpotify(chooseLove());
+        this.color = "#EEEEEE"
+        openSpotify(chooseLove())
     }
 
 
     inLoveButton.onRelease = function () {
-        this.color = "#EEEEEE";
-        this.textColor = "#000000";
+        this.color = color
+        this.textColor = "#000000"
     }
 
     /* TELL ME A STORY TAYLOR */
@@ -168,28 +172,29 @@ function setup() {
    
     storyButton.onHover = function () {
         this.stroke = "#AAAAFF"
-        this.textColor = "#000000";
-        this.text = "Tell me a Story!";
+        this.textColor = "#000000"
+        this.text = "Tell me a Story!"
         this.image = ""
 
         }
    
     storyButton.onOutside = function () {
-        this.color = "#e6fadc";
-        this.stroke = "#e6fadc";
+        this.color = color
+        this.stroke = color
         this.image = tellMeAStory
-        this.text = " ";
-        this.textColor = "#000000";
+        this.text = " "
+        this.textColor = "#000000"
         }
    
     storyButton.onPress = function () {
-        openSpotify(chooseStory());
+        this.color = "#EEEEEE"
+        openSpotify(chooseStory())
     }
 
 
     storyButton.onRelease = function () {
-        this.color = "#EEEEEE";
-        this.textColor = "#000000";
+        this.color = color
+        this.textColor = "#000000"
     }
     /* GOAT Taylor */
 
@@ -201,44 +206,56 @@ function setup() {
    
     goatButton.onHover = function () {
         this.stroke = "#AAAAFF"
-        this.textColor = "#000000";
-        this.text = " Top 10!";
+        this.textColor = "#000000"
+        this.text = " Top 10!"
         this.image = ""
 
         }
    
     goatButton.onOutside = function () {
-        this.color = "#e6fadc";
-        this.stroke = "#e6fadc";
+        this.color = color
+        this.stroke = color
         this.image = goatsOnly
-        this.text = " ";
-        this.textColor = "#000000";
+        this.text = " "
+        this.textColor = "#000000"
         }
    
     goatButton.onPress = function () {
-        openSpotify(chooseGoat());
+        this.color = "#EEEEEE"
+        openSpotify(chooseGoat())
     }
 
 
     goatButton.onRelease = function () {
-        this.color = "#EEEEEE";
-        this.textColor = "#000000";
+        this.color = color
+        this.textColor = "#000000"
     }
 }
 function draw() {
-    background(230,250,220);
+    background(color)
     hypeButton.draw()
     sadButton.draw()
     sadButHypeButton.draw()
     inLoveButton.draw()
     storyButton.draw()
     goatButton.draw()
+    textFont("serif", 50)
+    textAlign(CENTER)
+    text("Which Taylor Are You Today?", windowWidth/2, 200)
+    textFont("Helvetica", 20)
+    text("Select your mood below for Taylor Swift song recomendation. Press x to close the window", windowWidth/2, 250)
 }
 
 // close the window when x is pressed
 function keyTyped() {
     if (key == 'x') {
-     closeSpotify()
+        closeSpotify()
+    }
+}
+function keyPressed() {
+    colors = ["1ca5cd","#99743d", "#973269", "#97243f", "#cdc6a9", "#8b8b8b", "#f2acc4", "#7f7b7b", "#cf8c63", color]
+    if (keyCode == RIGHT_ARROW || keyCode == LEFT_ARROW || keyCode == UP_ARROW || keyCode == DOWN_ARROW) {
+        color = random(colors)
     }
 }
 
@@ -298,26 +315,22 @@ function openSpotify(songId){
     
     // if spotify is not already open
     else {
-        closeSpotifyButton=createButton("X");
-        closeSpotifyButton.position(myCanvas.width-closeSpotifyButton.height,myCanvas.height-closeSpotifyButton.height);
-        iframe=document.createElement('iframe');
-        var loc = "https://open.spotify.com/embed/track/"+songId; 
-        iframe.src=loc;
-        iframe.allow="encrypted-media";
-        iframe.width=myCanvas.width;
+        iframe=document.createElement('iframe')
+        var loc = "https://open.spotify.com/embed/track/"+songId
+        iframe.src=loc
+        iframe.allow="encrypted-media"
+        iframe.width=myCanvas.width
         iframe.height = 300
         myCanvas.resize(windowWidth, windowHeight-300)
-        myContainer.appendChild(iframe);
-        spotifyOpen=1;
-        closeSpotifyButton.mousePressed(closeSpotify);
+        myContainer.appendChild(iframe)
+        spotifyOpen=1
     }
 
 }
 
 function closeSpotify(){
-    iframe.remove();
-    closeSpotifyButton.remove();
-    spotifyOpen=0;
+    iframe.remove()
+    spotifyOpen=0
     myCanvas.resize(windowWidth, windowHeight)
-    redraw();
+    redraw()
 }
