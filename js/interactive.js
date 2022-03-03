@@ -1,5 +1,6 @@
 /* Used the following tutorial to figure out how to embed the iFrame! https://editor.p5js.org/llight/sketches/IgAEIvmr5P */
 
+// initialize
 var spotifyOpen=0
 var iframe
 var myCanvas
