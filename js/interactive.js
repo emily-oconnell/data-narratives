@@ -1,4 +1,4 @@
-/* Used the following tutorial to figure out the iFrame! https://editor.p5js.org/llight/sketches/IgAEIvmr5P */
+/* Used the following tutorial to figure out how to embed the iFrame! https://editor.p5js.org/llight/sketches/IgAEIvmr5P */
 
 var spotifyOpen=0
 var iframe
@@ -20,15 +20,20 @@ function setup() {
     myCanvas = createCanvas(windowWidth, windowHeight)
     myCanvas.parent('myContainer')
 
-    /* HYPE TAYLOR */
+    /* HYPE TAYLOR BUTTON*/
 
+    //create new button using clickable library
     hypeButton = new Clickable()
+    // background image from preloaded images above
     hypeButton.image = feelingHype
+    // fit and center image to button size
     hypeButton.fitImage = true
+    //change button position
     hypeButton.locate(windowWidth/8, 350)
 
    
     hypeButton.onHover = function () {
+        // style button for hover
         this.stroke = "#AAAAFF"
         this.textColor = "#000000"
         this.text = "Hype!"
@@ -36,6 +41,7 @@ function setup() {
         }
    
     hypeButton.onOutside = function () {
+        // style button for no hover
         this.color = color
         this.stroke = color
         this.image = feelingHype
@@ -44,16 +50,18 @@ function setup() {
         }
    
     hypeButton.onPress = function () {
+        // choose a hype song from the list using the chooseHype function
         this.color = "#EEEEEE"
         openSpotify(chooseHype())
     }
 
 
     hypeButton.onRelease = function () {
+        // style button for press release
         this.color = color
         this.textColor = "#000000"
     }
-    /* SAD TAYLOR */
+    /* SAD TAYLOR BUTTON */
 
 
     sadButton = new Clickable()
@@ -89,7 +97,7 @@ function setup() {
     }
 
 
-    /* SAD BUT HYPE TAYLOR */
+    /* SAD BUT HYPE TAYLOR BUTTON */
 
 
     sadButHypeButton = new Clickable()
@@ -125,7 +133,7 @@ function setup() {
         this.textColor = "#000000"
     }
 
-    /* IN LOVE TAYLOR */
+    /* IN LOVE TAYLOR BUTTON */
 
 
     inLoveButton = new Clickable()
@@ -161,7 +169,7 @@ function setup() {
         this.textColor = "#000000"
     }
 
-    /* TELL ME A STORY TAYLOR */
+    /* TELL ME A STORY TAYLOR BUTTON */
 
 
     storyButton = new Clickable()
@@ -196,7 +204,7 @@ function setup() {
         this.color = color
         this.textColor = "#000000"
     }
-    /* GOAT Taylor */
+    /* GOAT TayloR BUTTON */
 
     goatButton = new Clickable()
     goatButton.image = goatsOnly
@@ -231,20 +239,45 @@ function setup() {
         this.textColor = "#000000"
     }
 }
+
+
+let bgValue = 0
+
+function mousePressed() { 
+// choose an index to get function from list
+// reset count at 4 to make sure to not go out of bounds 
+    if (bgValue < 4 ){
+        bgValue += 1
+    } else {
+        bgValue = 0
+    }
+  }
+
 function draw() {
     background(color)
+
+    // use index from above function to call a function that plays animated background
+    var bgs = [colorBg,patternBackground,starBG,spottedBg,cloudBg]
+    bgs[bgValue]()
+
+    // draw all the butons
     hypeButton.draw()
     sadButton.draw()
     sadButHypeButton.draw()
     inLoveButton.draw()
     storyButton.draw()
     goatButton.draw()
+    
+    // add and format text
     textFont("serif", 50)
     textAlign(CENTER)
+    fill("black");
     text("Which Taylor Are You Today?", windowWidth/2, 200)
     textFont("Helvetica", 20)
-    text("Select your mood below for Taylor Swift song recomendation. Press x to close the window", windowWidth/2, 250)
+    text("Select your mood below for Taylor Swift song recomendations. \nPress x to close the window and click to change the background", windowWidth/2, 250)
+
 }
+
 
 // close the window when x is pressed
 function keyTyped() {
@@ -252,12 +285,17 @@ function keyTyped() {
         closeSpotify()
     }
 }
+
+// up and down arrows control color (for some backgrounds)
 function keyPressed() {
     colors = ["1ca5cd","#99743d", "#973269", "#97243f", "#cdc6a9", "#8b8b8b", "#f2acc4", "#7f7b7b", "#cf8c63", color]
-    if (keyCode == RIGHT_ARROW || keyCode == LEFT_ARROW || keyCode == UP_ARROW || keyCode == DOWN_ARROW) {
+    if (keyCode == UP_ARROW || keyCode == DOWN_ARROW) {
         color = random(colors)
     }
 }
+
+/* SONG SELECTION */
+// I wrote a python script to clean the spotify embed codes, see regex.py
 
 // randomly select a hype song, then return it
 function chooseHype () {
@@ -307,6 +345,9 @@ function chooseGoat () {
     return goatId
 }
 
+// the song's genre will be determined by which clickable button is pressed
+// take the selected song from the above functions
+
 function openSpotify(songId){
     // if spotify is already open, close it
     if (spotifyOpen==1){
@@ -314,6 +355,7 @@ function openSpotify(songId){
     }
     
     // if spotify is not already open
+    // embed the iframe of the randomly selected song from the genre
     else {
         iframe=document.createElement('iframe')
         var loc = "https://open.spotify.com/embed/track/"+songId
@@ -328,9 +370,210 @@ function openSpotify(songId){
 
 }
 
+// close the window
 function closeSpotify(){
     iframe.remove()
     spotifyOpen=0
     myCanvas.resize(windowWidth, windowHeight)
     redraw()
 }
+
+bgColor = "#668377"
+function patternBackground() {
+    // creates an effect of switching colors every second
+    background(bgColor);
+
+// on even seconds on the computer clock, use color 1 for the background and color 2 used for the circles
+  if (second() % 2 == 0) {
+    bgColor = "#668377"
+    noStroke();
+
+    for(var x = 0; x <= windowWidth; x+=20){
+      for(var y = 0; y<= windowHeight; y+=20){
+        fill("#B6CB9E");
+		  ellipse(x, y, 20, 20);   
+      }
+    }
+    // otherwise, color 2 is the background and color 1 is used for the circles
+    } else {
+    bgColor = "#B6CB9E"
+      noStroke();
+
+    for(var x = 0; x <= windowWidth; x+=20){
+      for(var y = 0; y<= windowHeight; y+=20){
+        fill("#668377");
+		  ellipse(x, y, 20, 20);   
+      }
+    } 
+  }
+
+  // rectangle so you can read the text
+  fill(color)
+  rect(210,140,1000,150)
+
+}
+
+// from p5 documentation, draw a star using lots of math, but easy to copy and paste!
+function star(x, y, radius1, radius2, npoints) {
+    let angle = TWO_PI / npoints;
+    let halfAngle = angle / 2.0;
+    beginShape();
+    for (let a = 0; a < TWO_PI; a += angle) {
+      let sx = x + cos(a) * radius2;
+      let sy = y + sin(a) * radius2;
+      vertex(sx, sy);
+      sx = x + cos(a + halfAngle) * radius1;
+      sy = y + sin(a + halfAngle) * radius1;
+      vertex(sx, sy);
+    }
+    endShape(CLOSE);
+  }
+
+  // use the above function to create the backround
+  function starBG() {
+    loop()
+    background("#c7c2ba");
+    color = "#c7c2ba"
+
+    push();
+    fill("#a6a5a7")
+    translate(100, 250);
+    //translate(width * 0.8, height * 0.5);
+    rotate(frameCount / -100.0);
+    star(0, 0, 30, 70, 5);
+    pop();
+
+    push();
+    fill("#a6a5a7")
+    translate(250, 100);
+    //translate(width * 0.8, height * 0.5);
+    rotate(frameCount / -100.0);
+    star(0, 0, 30, 70, 5);
+    pop();
+
+    push();
+    fill("#a6a5a7")
+    translate(75, 75);
+    //translate(width * 0.8, height * 0.5);
+    rotate(frameCount / -100.0);
+    star(0, 0, 30, 70, 5);
+    pop();
+  }
+
+  // change the color based on the x and y position of the of the mouse
+  // creates a pinkish/purple/blueish colorscheme
+  function colorBg() {
+    clear()
+    background(mouseY, 10, mouseX, 100)
+
+    // rectangle for readability
+    fill(color)
+    rect(210,140,1000,150)
+  }
+
+
+
+  let cloudX = 100;
+  let cloudY = 100; 
+
+  function cloudBg() {
+    color = "#944713"
+    background("#944713");
+  
+    // create a bunch of clouds using the below draw function
+    drawCloud(cloudX, cloudY-50);
+    drawCloud(cloudX - 100, cloudY + 100)
+    drawCloud(cloudX - 300, cloudY + 143)
+    drawCloud(cloudX - 1000, cloudY + 350)
+    drawCloud(cloudX - 400, cloudY + 500)
+    drawCloud(cloudX - 500, cloudY + 549)
+    drawCloud(cloudX - 1023, cloudY + 500)
+    drawCloud(cloudX - 1190, cloudY + 320)
+    drawCloud(cloudX - 1023, cloudY + 500)
+    drawCloud(cloudX - 1248, cloudY + 203)
+    drawCloud(cloudX - 1332, cloudY + 100)
+    drawCloud(cloudX - 1444, cloudY + 600)
+    drawCloud(cloudX - 1444, cloudY + 600)
+
+
+    drawCloud(cloudX + 100, cloudY + 100)
+    drawCloud(cloudX + 300, cloudY + 143)
+    drawCloud(cloudX + 100, cloudY + 350)
+    drawCloud(cloudX + 40, cloudY + 500)
+    drawCloud(cloudX + 290, cloudY + 549)
+    drawCloud(cloudX - 410, cloudY + 100)
+    drawCloud(cloudX - 399, cloudY + 9)
+    drawCloud(cloudX - 1000, cloudY + 350)
+    drawCloud(cloudX - 439, cloudY + 500)
+    drawCloud(cloudX - 902, cloudY + 549)
+
+    drawCloud(cloudX + 700, cloudY + 400)
+    drawCloud(cloudX + 620, cloudY + 100)
+    drawCloud(cloudX + 900, cloudY + 143)
+    drawCloud(cloudX + 859, cloudY + 350)
+    drawCloud(cloudX + 1000, cloudY + 549)
+    drawCloud(cloudX + 1200, cloudY + 500)
+    drawCloud(cloudX + 740, cloudY + 20)
+    drawCloud(cloudX + 1294, cloudY + 183)
+    drawCloud(cloudX + 1209, cloudY + 90)
+    drawCloud(cloudX + 1209, cloudY + 90)
+    drawCloud(cloudX + 1504, cloudY + 10)
+
+    // clouds will move at the randmoly selected "speed"
+    cloudX+=speed
+  }
+  
+  function drawCloud(cloudX, cloudY) {
+    
+    // function that draws the clouds
+    fill(250)
+    noStroke();
+    ellipse(cloudX, cloudY, 70, 50);
+    ellipse(cloudX + 10, cloudY + 15, 100, 50);
+    ellipse(cloudX - 20, cloudY + 15, 100, 50);
+    speed=random(0.1,0.7);
+  }
+
+  // create a class that creates a circle object
+  // based on the Jitter object in the p5 documentation
+  class Circle {
+    
+    // use constructor to define attributes of a circle
+    constructor() {
+      this.x = random(width);
+      this.y = random(height);
+      this.diameter = random(10, 30);
+      this.speed = 1;
+    }
+  
+    // define how the circle objects move
+    move() {
+      this.x += random(-this.speed, this.speed);
+      this.y += random(-this.speed, this.speed);
+    }
+  
+    // define how the circle objects are drawn
+    display() {
+      ellipse(this.x, this.y, this.diameter, this.diameter);
+    }
+  }
+
+  i = 0
+  let circles = []
+
+  // use the above circle class to create many circle objects
+  function spottedBg() {
+
+
+    background("gray");
+
+    fill("black")
+
+        circles.push(new Circle());
+      for (let i = 0; i < circles.length; i++) {
+        circles[i].move();
+        circles[i].display();
+      }
+      fill(color)
+      rect(210,140,1000,150)
+  }
