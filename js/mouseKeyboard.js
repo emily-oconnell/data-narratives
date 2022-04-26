@@ -22,7 +22,7 @@ function setup(){
 function draw(){
 
   if(mouseIsPressed == true){
-    background(40, 100, 100);
+    backgrund(40, 100, 100);
   }else{
     background(180, 55, 200)
   }
