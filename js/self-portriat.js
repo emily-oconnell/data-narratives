@@ -69,13 +69,14 @@ function setup() {
   for (let i=150; i<windowHeight-100; i+=50){
     for (let j = 200; j < windowWidth-300; j+=50) {
       // create a 50x50 square object
-      // with the current valuse of j as the x and the current value of i
+      // with the current valuse of j as the x and the current value of i as y
       squares.push(new Square(j,i, 50,50))
     }
   }
 }
 
 function draw() {
+  // format text
   fill(0)
   textSize(50)
   textFont('Helvetica')
@@ -140,7 +141,7 @@ function getAvg(photo) {
 function makeList() {
   // for each image in the array
   for (let i = 0; i < imgList.length; i++) {
-    // fill with the average color of that image and display the square
+    // add the average color of that image to the list
     let newColor = getAvg(imgList[i])
     colorList.push(newColor)
   }
@@ -170,7 +171,7 @@ function mousePressed() {
 /* Make each squre object*/
 class Square {
   // each square needs to be defined with 
-  // an x-value, y-value, width, and height
+  // an x-value, y-value, width, height, and color
   constructor(x,y,w,h) {
     this.x = x
     this.y = y
@@ -179,9 +180,9 @@ class Square {
     this.color = color
   }
   display() {
-    // display the square object based on 
+    // display the square object based on the values specified in the constructor
+    // set color to a random color from the colorList
     this.color = random(colorList)
-    // the variables defined in the constructor
     fill(this.color)
     rect(this.x, this.y, this.w, this.h);
   }
