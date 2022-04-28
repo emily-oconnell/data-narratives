@@ -1,20 +1,17 @@
-let img;
+let img
+let color
 
 // initialize avg colors
 let avgRed = 0;
 let avgGreen = 0;
 let avgBlue = 0;
 
-// this will hold the images
+// initialize lists
 let imgList = []
-let hoverList = []
-
-// this will hold the rgb values
+let squares =[]
 let colorList = []
 
-let photoList =[]
-
-// load the images into the array array
+// load the images into the array 
 function preload() {
   imgList[0] = loadImage("images/leg1.jpeg");
   imgList[1] = loadImage("images/face1.jpeg");
@@ -23,97 +20,177 @@ function preload() {
   imgList[4] = loadImage("images/legnfoot.jpeg");
   imgList[5] = loadImage("images/nose.jpeg");
   imgList[6] = loadImage("images/cheek2.jpeg");
+  imgList[7] = loadImage("images/normalhand.jpeg");
+  imgList[8] = loadImage("images/covidfoot.jpeg");
+  imgList[9] = loadImage("images/ear.jpeg");
+  imgList[10] = loadImage("images/foot.jpeg");
+  imgList[11] = loadImage("images/morefoot.jpeg");
+  imgList[12] = loadImage("images/leghover.jpeg");
+  imgList[13] = loadImage("images/cheeckhover.jpeg");
+  imgList[14] = loadImage("images/palmhover.jpeg");
+  imgList[15] = loadImage("images/handhover.jpg");
+  imgList[16] = loadImage("images/legnfoothover.jpeg");
+  imgList[17] = loadImage("images/nosehover.jpeg");
+  imgList[18] = loadImage("images/cheek2hover.jpeg");
+  imgList[19] = loadImage("images/earhover.jpeg");
+  imgList[20] = loadImage("images/covidhover.jpeg");
+  imgList[21] = loadImage("images/ear.jpeg");
+  imgList[22] = loadImage("images/normalhand.jpeg");
 
-
-  hoverList[0] = loadImage("images/leghover.jpeg");
-  hoverList[1] = loadImage("images/cheeckhover.jpeg");
-  hoverList[2] = loadImage("images/palmhover.jpeg");
-  hoverList[3] = loadImage("images/handhover.jpg");
-  hoverList[4] = loadImage("images/legnfoothover.jpeg");
-  hoverList[5] = loadImage("images/nosehover.jpeg");
-  hoverList[6] = loadImage("images/cheek2hover.jpeg");
-
+  imgList[23] = loadImage("images/leg1.jpeg");
+  imgList[24] = loadImage("images/face1.jpeg");
+  imgList[25] = loadImage("images/palm.jpeg");
+  imgList[26] = loadImage("images/hand.jpeg");
+  imgList[27] = loadImage("images/legnfoot.jpeg");
+  imgList[28] = loadImage("images/nose.jpeg");
+  imgList[29] = loadImage("images/cheek2.jpeg");
+  imgList[30] = loadImage("images/normalhand.jpeg");
+  imgList[31] = loadImage("images/covidfoot.jpeg");
+  imgList[32] = loadImage("images/ear.jpeg");
+  imgList[33] = loadImage("images/foot.jpeg");
+  imgList[34] = loadImage("images/morefoot.jpeg");
+  imgList[35] = loadImage("images/leghover.jpeg");
+  imgList[36] = loadImage("images/cheeckhover.jpeg");
+  imgList[37] = loadImage("images/palmhover.jpeg");
+  imgList[38] = loadImage("images/handhover.jpg");
+  imgList[39] = loadImage("images/legnfoothover.jpeg");
+  imgList[40] = loadImage("images/nosehover.jpeg");
+  imgList[41] = loadImage("images/cheek2hover.jpeg");
+  imgList[42] = loadImage("images/earhover.jpeg");
+  imgList[43] = loadImage("images/covidhover.jpeg");
+  imgList[44] = loadImage("images/ear.jpeg");
+  imgList[45] = loadImage("images/normalhand.jpeg");
 
 }
 
-x = 100
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  noStroke();
-
-  for (let i = 0; i < 7; i++) {
-    photoList.push(new Square(x,100,100,100));
-    x += 110
+  createCanvas(windowWidth, windowHeight)
+  noStroke()
+  for (let i=150; i<windowHeight-100; i+=50){
+    for (let j = 200; j < windowWidth-300; j+=50) {
+      // create a 50x50 square object
+      // with the current valuse of j as the x and the current value of i
+      squares.push(new Square(j,i, 50,50))
+    }
   }
-
 }
 
 function draw() {
+  fill(0)
+  textSize(50)
+  textFont('Helvetica')
+  textStyle(BOLD)
+  text('SKINTONE', 200, 70)
 
-  for (let i = 0; i < photoList.length; i++) {
-    fill(getAvg(imgList[i]));
-    photoList[i].display()
-    if (photoList[i].mouseHover(mouseX, mouseY)) {
-      fill(getAvg(hoverList[i]))
-      photoList[i].display()
+  textSize(20)
+  text('Paint with all the colors of the skin', 200, 100)
+  textSize(10)
+  textStyle(NORMAL)
+  text('Click a square to toggle the color - Press any key to randomize', 200, 725)
+  
+
+  // call the makeList function to make a list of all colors
+  makeList()
+  // for each square created 
+  for (let i=0; i < squares.length; i++) {
+      // display the square
+      squares[i].display()
+      if(mousePressed()){
+        // if an element is pressed
+        // call display again to change the color of the square
+        squares[i].display()
+      }
     }
-  }
-
 }
 
-function getAvg(photo) {
-  photo.resize(width, height);
 
-  // Load the pixels
+function getAvg(photo) {
+
+  // load the pixels
   photo.loadPixels();
 
-  // Loop through the pixels X and Y
+  // loop through all pixels
   for (let y = 0; y < photo.height; y++) {
     for (let x = 0; x < photo.width; x++) {
 
-      // Calculate the pixel index
+      // forumla for getting each pixel
       const index = (y * photo.width + x) * 4;
 
-      // Sum the red, green, and blue values
+      // add the r,g,b vlaues
       avgRed += photo.pixels[index + 0];
       avgGreen += photo.pixels[index + 1];
       avgBlue += photo.pixels[index + 2];
     }
-
- 
   }
 
+  // count the total number of each r,g,b,a pixels
   const numPixels = photo.pixels.length / 4;
 
+  // calculate the average r,g,b
   avgRed /= numPixels;
   avgGreen /= numPixels;
   avgBlue /= numPixels;
 
-
-  avgColor = [avgRed,avgGreen, avgBlue]
-
-
+  // reaturn a list of rounded avg r,g,b value
+  avgColor = [round(avgRed), round(avgGreen), round(avgBlue)]
 
   return avgColor
 }
 
+function makeList() {
+  // for each image in the array
+  for (let i = 0; i < imgList.length; i++) {
+    // fill with the average color of that image and display the square
+    let newColor = getAvg(imgList[i])
+    colorList.push(newColor)
+  }
+  return colorList
+}
+
+function keyPressed() {
+  // loop once when mouse is pressed
+  loop();
+}
+
+function keyReleased() {
+  // stop looping
+noLoop();
+}
+
+function mousePressed() {
+  // overload mousePressed
+  for (i=0;i<squares.length;i++) {
+    if (squares[i].clicked()) {
+      squares[i].display()
+    }
+  }
+
+}
+
+/* Make each squre object*/
 class Square {
+  // each square needs to be defined with 
+  // an x-value, y-value, width, and height
   constructor(x,y,w,h) {
     this.x = x
     this.y = y
     this.w = w
     this.h = h
-    //this.color = (r,g,b)
+    this.color = color
   }
   display() {
-    //fill(this.color)
+    // display the square object based on 
+    this.color = random(colorList)
+    // the variables defined in the constructor
+    fill(this.color)
     rect(this.x, this.y, this.w, this.h);
   }
-  mouseHover(mx, my){
-  if (mx > this.x && mx < this. x + this.w  && my > this.y && my <  this.y+this.h)  {
-    return true
+  clicked() {
+    // if the mouse is inside the square
+    if (mouseX > this.x && mouseX < this. x + this.w  && mouseY > this.y && mouseY <  this.y+this.h)  {
+      this.display()
     } else {
-      return false
+      noLoop()
     }
   }
 }
